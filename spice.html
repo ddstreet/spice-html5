@@ -46,18 +46,41 @@
 
         <script type="module" crossorigin="anonymous">
             import * as SpiceHtml5 from './src/main.js';
+            window.connect = connect;
 
             var host = null, port = null;
             var sc;
 
+            var auto = urlParams.get('autoconnect') ;
+            var host = urlParams.get("host") ;
+            var port = urlParams.get("port") ;
+            var password = urlParams.get("password") ;
+               
+            document.getElementById("host").value = host ;
+            document.getElementById("port").value = port;
+            document.getElementById("password").value = password;
+            document.getElementById('hostname').innerHTML = (host) ;
+
+            if (auto === 'true' || auto == '1') {
+            auto = true;
+            connect();
+            }
+
             function spice_error(e)
             {
                 disconnect();
+                if (e !== undefined && e.message === "Permission denied.") {
+                    document.getElementById("passwordForm").style.display = "block";  
+                } 
             }
 
             function connect()
             {
                 var host, port, password, scheme = "ws://", uri;
+
+                if (window.location.protocol == 'https:') {
+                    scheme = "wss://";
+                }
 
                 host = document.getElementById("host").value;
                 port = document.getElementById("port").value;
@@ -175,7 +198,23 @@
             <div id="spice-screen" class="spice-screen"></div>
         </div>
 
+        <div class="form-popup" id="passwordForm">
+            <form action="/action_page.php" class="form-container">
+              <h3>Spice requires a password.</h3>
+
+              <input type="password" autocomplete="off" placeholder="Enter Password" id="psw" name="psw" required>
+          
+              <button type="button" class="btn cancel" onclick="connectpsw()">Connect</button>
+            </form>
+        </div>
+
         <script>
+            function connectpsw() {
+                document.getElementById("password").value = document.getElementById("psw").value;   
+                document.getElementById("passwordForm").style.display = "none"; 
+                connect() ;   
+            }
+
             function show_debug_Logs() {
                 var content = document.getElementById('message-div')
                 if (content.style.display === 'block') {
@@ -201,7 +240,7 @@
             }
 
             document.getElementById('debugLogs').addEventListener('click', function() { show_debug_Logs(); });
-            display_hostname()
+            
         </script>
     </body>
 </html>
