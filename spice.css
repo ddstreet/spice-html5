@@ -14,19 +14,16 @@ body
 button
 {
     cursor: pointer;
-    color: #000000;
-    background-color: #999999;
-    border: 1px solid #4a4a4a;
+    color: #ffffff;
+    background-color: #000000;
+    border:  #4095c6;
     min-width: 150px;
-    border-radius: 10px;
-    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#24414e));
-    background: -moz-linear-gradient(top, #fff, #24414e);
-    -ms-transform: translate(15%, -8%);
     transform: translate(15%, -8%);
     font-size: .90em;
-    font-weight: bolder;
-    padding: 0px 0px 3px 0px;
-    margin-top: 5px;
+    padding: 3px 0px 3px 0px;
+    margin-top: 10px;
+    border-radius: 2em;
+
 }
 button:focus
 {
@@ -116,11 +113,25 @@ canvas
     padding-top: 2px;
     border-bottom: 2px solid #00000040;
 }
-#login p
-{
-    margin-left: 27%;
-    display: inline;
-    font-size: large;
+
+#login h1 {
+    position: relative;
+    bottom: 17px;
+    left: 50px;
+    width: 50px
+}
+#login span {
+    cursor: pointer;
+    display: block;
+    width: 30px;
+    height: 5px;
+    border-radius: 3px;
+    background-color: black;
+    margin: 4px 0;
+    position: relative;
+    transform-origin: 4px 0px;
+    top: 10px;
+    left: 10px;
 }
 
 #spice-area
