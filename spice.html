@@ -145,6 +145,16 @@
 
             document.getElementById('connectButton').onclick = connect;
             document.getElementById('sendCtrlAltDel').addEventListener('click', function(){ SpiceHtml5.sendCtrlAltDel(sc); });
+
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('host'))
+                document.getElementById('host').value = urlParams.get('host');
+            if (urlParams.has('port'))
+                document.getElementById('port').value = urlParams.get('port');
+            if (urlParams.has('password'))
+                document.getElementById('password').value = urlParams.get('password');
+            if (urlParams.has('autostart'))
+                connect();
         </script>
 
     </head>
